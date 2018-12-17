@@ -14,6 +14,7 @@ import {
   Body,
   Right,
   Title,
+  Subtitle,
   Toast
 } from "native-base";
 import { RefreshControl, Alert, AsyncStorage } from "react-native";
@@ -62,24 +63,25 @@ export class Home extends Component {
   render() {
     return (
       <Container>
-        <Header>
+        <Header style={{ backgroundColor: "green" }}>
           <Left>
             <Button
               transparent
               onPress={() => this.props.navigation.navigate("DrawerOpen")}
             >
-              <Icon name="menu" />
+              <Icon name="menu" style={{ color: "white" }} />
             </Button>
           </Left>
           <Body>
-            <Title>Informacion</Title>
+            <Title style={{ color: "white" }}>Informacion</Title>
+            <Subtitle style={{ color: "white" }}>Balances</Subtitle>
           </Body>
           <Right>
             <Button
               transparent
               onPress={() => this.props.navigation.replace("LoginPage")}
             >
-              <Icon name="exit" />
+              <Icon name="exit" style={{ color: "white" }} />
             </Button>
           </Right>
         </Header>
