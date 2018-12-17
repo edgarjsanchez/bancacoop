@@ -15,12 +15,13 @@ import {
   Right,
   Title,
   Subtitle,
-  Toast
+  Toast,
+  Drawer
 } from "native-base";
 import { RefreshControl, Alert, AsyncStorage } from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { cuentas } from "../../api/auth";
-
+import SideBar from "../menu/SideBar";
 export class Home extends Component {
   state = {
     refreshing: false,
@@ -60,99 +61,112 @@ export class Home extends Component {
     });
   };
 
+  closeDrawer = () => {
+    this.drawer._root.close();
+  };
+
+  openDrawer = () => {
+    this.drawer._root.open();
+  };
+
   render() {
     return (
-      <Container>
-        <Header style={{ backgroundColor: "green" }}>
-          <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.navigate("DrawerOpen")}
-            >
-              <Icon name="menu" style={{ color: "white" }} />
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{ color: "white" }}>Informacion</Title>
-            <Subtitle style={{ color: "white" }}>Balances</Subtitle>
-          </Body>
-          <Right>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.replace("LoginPage")}
-            >
-              <Icon name="exit" style={{ color: "white" }} />
-            </Button>
-          </Right>
-        </Header>
-        <Content
-          contentContainerStyle={{
-            padding: "2%"
-          }}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-              title="Actualizando..."
-            />
-          }
-        >
-          <Card>
-            <CardItem header bordered>
-              <Text>Cuentas</Text>
-            </CardItem>
-            {this.state.cuentas.map((cuenta, index) => (
-              <CardItem
-                bordered
-                key={index}
-                button
-                onPress={() => Alert.alert(`${cuenta.balance}`)}
+      <Drawer
+        ref={ref => {
+          this.drawer = ref;
+        }}
+        content={<SideBar navigator={this.navigator} />}
+        onClose={() => this.closeDrawer()}
+      >
+        <Container>
+          <Header style={{ backgroundColor: "green" }}>
+            <Left>
+              <Button transparent onPress={() => this.openDrawer()}>
+                <Icon name="menu" style={{ color: "white" }} />
+              </Button>
+            </Left>
+            <Body>
+              <Title style={{ color: "white" }}>Informacion</Title>
+              <Subtitle style={{ color: "white" }}>Balances</Subtitle>
+            </Body>
+            <Right>
+              <Button
+                transparent
+                onPress={() => this.props.navigation.replace("LoginPage")}
               >
-                <Grid>
-                  <Col size={35}>
-                    <Row>
-                      <Text
-                        style={{
-                          color: "green"
-                        }}
-                      >
-                        {cuenta.descripcion}
-                      </Text>
-                    </Row>
-                    <Row>
-                      <Text note>Tipo {cuenta.tipo}</Text>
-                    </Row>
-                  </Col>
-                  <Col size={60} style={{ alignItems: "flex-end" }}>
-                    <Row>
-                      <Text>{cuenta.balance}</Text>
-                    </Row>
-                    <Row>
-                      <Text note>Disp: {cuenta.disponible}</Text>
-                    </Row>
-                  </Col>
-                </Grid>
+                <Icon name="exit" style={{ color: "white" }} />
+              </Button>
+            </Right>
+          </Header>
+          <Content
+            contentContainerStyle={{
+              padding: "2%"
+            }}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+                title="Actualizando..."
+              />
+            }
+          >
+            <Card>
+              <CardItem header bordered>
+                <Text style={{ color: "grey" }}>Cuentas</Text>
               </CardItem>
-            ))}
-          </Card>
-        </Content>
-        <Footer>
-          <FooterTab>
-            <Button onPress={() => this.toggleTab1()}>
-              <Icon name="apps" />
-            </Button>
-            <Button onPress={() => this.toggleTab2()}>
-              <Icon name="camera" />
-            </Button>
-            <Button onPress={() => this.toggleTab3()}>
-              <Icon name="compass" />
-            </Button>
-            <Button onPress={() => this.toggleTab4()}>
-              <Icon name="contact" />
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
+              {this.state.cuentas.map((cuenta, index) => (
+                <CardItem
+                  bordered
+                  key={index}
+                  button
+                  onPress={() => Alert.alert(`${cuenta.balance}`)}
+                >
+                  <Grid>
+                    <Col size={30}>
+                      <Row>
+                        <Text
+                          style={{
+                            color: "black"
+                          }}
+                        >
+                          {cuenta.descripcion}
+                        </Text>
+                      </Row>
+                      <Row>
+                        <Text note>Tipo {cuenta.tipo}</Text>
+                      </Row>
+                    </Col>
+                    <Col size={60} style={{ alignItems: "flex-end" }}>
+                      <Row>
+                        <Text style={{ color: "green" }}>{cuenta.balance}</Text>
+                      </Row>
+                      <Row>
+                        <Text note>Disp: {cuenta.disponible}</Text>
+                      </Row>
+                    </Col>
+                  </Grid>
+                </CardItem>
+              ))}
+            </Card>
+          </Content>
+          <Footer>
+            <FooterTab>
+              <Button onPress={() => this.toggleTab1()}>
+                <Icon name="apps" />
+              </Button>
+              <Button onPress={() => this.toggleTab2()}>
+                <Icon name="camera" />
+              </Button>
+              <Button onPress={() => this.toggleTab3()}>
+                <Icon name="compass" />
+              </Button>
+              <Button onPress={() => this.toggleTab4()}>
+                <Icon name="contact" />
+              </Button>
+            </FooterTab>
+          </Footer>
+        </Container>
+      </Drawer>
     );
   }
 }

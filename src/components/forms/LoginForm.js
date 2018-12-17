@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import {
   Container,
-  Content,
   Form,
   Item,
   Input,
-  Button,
   Icon,
+  Button,
   Text,
   Toast,
   Spinner
