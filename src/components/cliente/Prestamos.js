@@ -17,7 +17,7 @@ export default class Prestamos extends Component {
             onPress={() => Alert.alert(`${prestamo.balance}`)}
           >
             <Grid>
-              <Col size={45}>
+              <Col size={65}>
                 <Row>
                   <Text
                     style={{
@@ -28,16 +28,17 @@ export default class Prestamos extends Component {
                   </Text>
                 </Row>
                 <Row>
-                  <Text note>Pago {prestamo.pago}</Text>
+                  <Text note>Pago: {prestamo.pago}</Text>
+                </Row>
+                <Row>
+                  <Text note>En: {prestamo.proxpago}</Text>
                 </Row>
               </Col>
-              <Col size={55} style={{ alignItems: "flex-end" }}>
-                <Row>
-                  <Text style={{ color: "green" }}>{prestamo.balance}</Text>
-                </Row>
-                <Row>
-                  <Text note>Prox Pago: {prestamo.proxpago}</Text>
-                </Row>
+              <Col
+                size={35}
+                style={{ alignItems: "flex-end", justifyContent: "center" }}
+              >
+                <Text style={{ color: "green" }}>{prestamo.balance}</Text>
               </Col>
             </Grid>
           </CardItem>
