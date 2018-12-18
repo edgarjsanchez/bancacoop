@@ -22,7 +22,7 @@ import { RefreshControl, Alert, AsyncStorage } from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { getCuentas, getPrestamos } from "../../api/auth";
 import SideBar from "../menu/SideBar";
-import Prestamos from "./Prestamos";
+import Prestamos from "../cliente/Prestamos";
 
 export class Home extends Component {
   state = {
