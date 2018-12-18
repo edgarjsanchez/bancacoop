@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import {
   Container,
   Content,
-  Text,
-  Card,
-  CardItem,
   Footer,
   Button,
   Icon,
