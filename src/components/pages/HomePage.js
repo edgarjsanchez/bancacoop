@@ -20,17 +20,18 @@ import {
 } from "native-base";
 import { RefreshControl, Alert, AsyncStorage } from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { cuentas } from "../../api/auth";
+import { getCuentas } from "../../api/auth";
 import SideBar from "../menu/SideBar";
 export class Home extends Component {
   state = {
     refreshing: false,
-    cuentas: []
+    cuentas: [],
+    prestamos: []
   };
 
   componentDidMount() {
     AsyncStorage.getItem("usuario", (err, usuario) => {
-      cuentas(usuario)
+      getCuentas(usuario)
         .then(cuentas => this.setState({ cuentas }))
         .catch(err => {
           this.showError("Problemas para obtener balances.");
@@ -112,7 +113,45 @@ export class Home extends Component {
           >
             <Card>
               <CardItem header bordered>
-                <Text style={{ color: "grey" }}>Cuentas</Text>
+                <Text style={{ color: "green" }}>Cuentas</Text>
+              </CardItem>
+              {this.state.cuentas.map((cuenta, index) => (
+                <CardItem
+                  bordered
+                  key={index}
+                  button
+                  onPress={() => Alert.alert(`${cuenta.balance}`)}
+                >
+                  <Grid>
+                    <Col size={30}>
+                      <Row>
+                        <Text
+                          style={{
+                            color: "black"
+                          }}
+                        >
+                          {cuenta.descripcion}
+                        </Text>
+                      </Row>
+                      <Row>
+                        <Text note>Tipo {cuenta.tipo}</Text>
+                      </Row>
+                    </Col>
+                    <Col size={60} style={{ alignItems: "flex-end" }}>
+                      <Row>
+                        <Text style={{ color: "green" }}>{cuenta.balance}</Text>
+                      </Row>
+                      <Row>
+                        <Text note>Disp: {cuenta.disponible}</Text>
+                      </Row>
+                    </Col>
+                  </Grid>
+                </CardItem>
+              ))}
+            </Card>
+            <Card>
+              <CardItem header bordered>
+                <Text style={{ color: "green" }}>Prestamos</Text>
               </CardItem>
               {this.state.cuentas.map((cuenta, index) => (
                 <CardItem

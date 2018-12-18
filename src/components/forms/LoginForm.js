@@ -12,7 +12,7 @@ import {
 } from "native-base";
 import { Image, View, StyleSheet, Alert } from "react-native";
 import { PropTypes } from "prop-types";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Platform } from "react-native";
 import FingerPrint from "../../touch/FingerPrint";
 import TouchID from "react-native-touch-id";
 import setAuthorization from "../../utils/setAuthorizationHeader";
@@ -140,7 +140,9 @@ class LoginForm extends Component {
                 {!loading && <Text>Log in</Text>}
                 {loading && <Spinner color="white" />}
               </Button>
-              <FingerPrint auth={this.authenticate} />
+              {Platform.OS === "ios" && (
+                <FingerPrint auth={this.authenticate} />
+              )}
             </View>
           </Form>
         </View>

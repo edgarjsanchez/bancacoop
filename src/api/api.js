@@ -9,7 +9,7 @@ export default {
       axiosrequest
         .post("http://192.168.89.130:8888/api/auth", { credentials })
         .then(res => res.data.user),
-    cuentas: cliente =>
+    getCuentas: cliente =>
       axiosrequest
         .post("http://192.168.89.130:8888/api/cuentas", { cliente })
         .then(res => res.data.cuentas)
