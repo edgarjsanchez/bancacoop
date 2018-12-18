@@ -12,6 +12,10 @@ export default {
     getCuentas: cliente =>
       axiosrequest
         .post("http://192.168.89.130:8888/api/cuentas", { cliente })
-        .then(res => res.data.cuentas)
+        .then(res => res.data.cuentas),
+    getPrestamos: cliente =>
+      axiosrequest
+        .post("http://192.168.89.130:8888/api/prestamos", { cliente })
+        .then(res => res.data.prestamos)
   }
 };

@@ -20,8 +20,10 @@ import {
 } from "native-base";
 import { RefreshControl, Alert, AsyncStorage } from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import { getCuentas } from "../../api/auth";
+import { getCuentas, getPrestamos } from "../../api/auth";
 import SideBar from "../menu/SideBar";
+import Prestamos from "./Prestamos";
+
 export class Home extends Component {
   state = {
     refreshing: false,
@@ -35,6 +37,11 @@ export class Home extends Component {
         .then(cuentas => this.setState({ cuentas }))
         .catch(err => {
           this.showError("Problemas para obtener balances.");
+        });
+      getPrestamos(usuario)
+        .then(prestamos => this.setState({ prestamos }))
+        .catch(err => {
+          this.showError("Problemas para obtener balances prestamos.");
         });
     });
   }
@@ -149,44 +156,48 @@ export class Home extends Component {
                 </CardItem>
               ))}
             </Card>
-            <Card>
+            <Prestamos prestamos={this.state.prestamos} />
+            {/*             <Card>
               <CardItem header bordered>
                 <Text style={{ color: "green" }}>Prestamos</Text>
               </CardItem>
-              {this.state.cuentas.map((cuenta, index) => (
+              {this.state.prestamos.map((prestamo, index) => (
                 <CardItem
                   bordered
                   key={index}
                   button
-                  onPress={() => Alert.alert(`${cuenta.balance}`)}
+                  onPress={() => Alert.alert(`${prestamo.balance}`)}
                 >
                   <Grid>
-                    <Col size={30}>
+                    <Col size={45}>
                       <Row>
                         <Text
                           style={{
                             color: "black"
                           }}
                         >
-                          {cuenta.descripcion}
+                          {prestamo.descripcion}
                         </Text>
                       </Row>
                       <Row>
-                        <Text note>Tipo {cuenta.tipo}</Text>
+                        <Text note>Pago {prestamo.pago}</Text>
                       </Row>
                     </Col>
-                    <Col size={60} style={{ alignItems: "flex-end" }}>
+                    <Col size={55} style={{ alignItems: "flex-end" }}>
                       <Row>
-                        <Text style={{ color: "green" }}>{cuenta.balance}</Text>
+                        <Text style={{ color: "green" }}>
+                          {prestamo.balance}
+                        </Text>
                       </Row>
                       <Row>
-                        <Text note>Disp: {cuenta.disponible}</Text>
+                        <Text note>Prox Pago: {prestamo.proxpago}</Text>
                       </Row>
                     </Col>
                   </Grid>
                 </CardItem>
               ))}
             </Card>
+ */}
           </Content>
           <Footer>
             <FooterTab>

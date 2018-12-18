@@ -12,6 +12,8 @@ class LoginPage extends React.Component {
       AsyncStorage.setItem("usuario", res.login);
       Keychain.setGenericPassword("session", res.token).then(() => {
         setAuthorization(res.token);
+        console.log(res.token);
+        console.log("OVT");
         this.props.navigation.replace("HomePage");
       });
     });
