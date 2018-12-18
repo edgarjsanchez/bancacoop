@@ -22,6 +22,7 @@ import { RefreshControl, Alert, AsyncStorage } from "react-native";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import { getCuentas, getPrestamos } from "../../api/auth";
 import SideBar from "../menu/SideBar";
+import Cuentas from "../cliente/Cuentas";
 import Prestamos from "../cliente/Prestamos";
 
 export class Home extends Component {
@@ -118,86 +119,8 @@ export class Home extends Component {
               />
             }
           >
-            <Card>
-              <CardItem header bordered>
-                <Text style={{ color: "green" }}>Cuentas</Text>
-              </CardItem>
-              {this.state.cuentas.map((cuenta, index) => (
-                <CardItem
-                  bordered
-                  key={index}
-                  button
-                  onPress={() => Alert.alert(`${cuenta.balance}`)}
-                >
-                  <Grid>
-                    <Col size={30}>
-                      <Row>
-                        <Text
-                          style={{
-                            color: "black"
-                          }}
-                        >
-                          {cuenta.descripcion}
-                        </Text>
-                      </Row>
-                      <Row>
-                        <Text note>Tipo {cuenta.tipo}</Text>
-                      </Row>
-                    </Col>
-                    <Col size={60} style={{ alignItems: "flex-end" }}>
-                      <Row>
-                        <Text style={{ color: "green" }}>{cuenta.balance}</Text>
-                      </Row>
-                      <Row>
-                        <Text note>Disp: {cuenta.disponible}</Text>
-                      </Row>
-                    </Col>
-                  </Grid>
-                </CardItem>
-              ))}
-            </Card>
+            <Cuentas cuentas={this.state.cuentas} />
             <Prestamos prestamos={this.state.prestamos} />
-            {/*             <Card>
-              <CardItem header bordered>
-                <Text style={{ color: "green" }}>Prestamos</Text>
-              </CardItem>
-              {this.state.prestamos.map((prestamo, index) => (
-                <CardItem
-                  bordered
-                  key={index}
-                  button
-                  onPress={() => Alert.alert(`${prestamo.balance}`)}
-                >
-                  <Grid>
-                    <Col size={45}>
-                      <Row>
-                        <Text
-                          style={{
-                            color: "black"
-                          }}
-                        >
-                          {prestamo.descripcion}
-                        </Text>
-                      </Row>
-                      <Row>
-                        <Text note>Pago {prestamo.pago}</Text>
-                      </Row>
-                    </Col>
-                    <Col size={55} style={{ alignItems: "flex-end" }}>
-                      <Row>
-                        <Text style={{ color: "green" }}>
-                          {prestamo.balance}
-                        </Text>
-                      </Row>
-                      <Row>
-                        <Text note>Prox Pago: {prestamo.proxpago}</Text>
-                      </Row>
-                    </Col>
-                  </Grid>
-                </CardItem>
-              ))}
-            </Card>
- */}
           </Content>
           <Footer>
             <FooterTab>

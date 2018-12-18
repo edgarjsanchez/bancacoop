@@ -2,41 +2,41 @@ import React, { Component } from "react";
 import { Alert } from "react-native";
 import { Card, CardItem, Grid, Row, Col, Text } from "native-base";
 
-export default class Prestamos extends Component {
+export default class Cuentas extends Component {
   render() {
     return (
       <Card>
         <CardItem header bordered>
-          <Text style={{ color: "green" }}>Prestamos</Text>
+          <Text style={{ color: "green" }}>Cuentas</Text>
         </CardItem>
-        {this.props.prestamos.map((prestamo, index) => (
+        {this.props.cuentas.map((cuenta, index) => (
           <CardItem
             bordered
             key={index}
             button
-            onPress={() => Alert.alert(`${prestamo.balance}`)}
+            onPress={() => Alert.alert(`${cuenta.balance}`)}
           >
             <Grid>
-              <Col size={45}>
+              <Col size={30}>
                 <Row>
                   <Text
                     style={{
                       color: "black"
                     }}
                   >
-                    {prestamo.descripcion}
+                    {cuenta.descripcion}
                   </Text>
                 </Row>
                 <Row>
-                  <Text note>Pago {prestamo.pago}</Text>
+                  <Text note>Tipo {cuenta.tipo}</Text>
                 </Row>
               </Col>
-              <Col size={55} style={{ alignItems: "flex-end" }}>
+              <Col size={60} style={{ alignItems: "flex-end" }}>
                 <Row>
-                  <Text style={{ color: "green" }}>{prestamo.balance}</Text>
+                  <Text style={{ color: "green" }}>{cuenta.balance}</Text>
                 </Row>
                 <Row>
-                  <Text note>Prox Pago: {prestamo.proxpago}</Text>
+                  <Text note>Disp: {cuenta.disponible}</Text>
                 </Row>
               </Col>
             </Grid>
