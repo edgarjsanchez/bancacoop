@@ -15,8 +15,7 @@ import {
   Toast,
   Drawer
 } from "native-base";
-import { RefreshControl, Alert, AsyncStorage } from "react-native";
-import { Col, Row, Grid } from "react-native-easy-grid";
+import { RefreshControl, AsyncStorage } from "react-native";
 import { getCuentas, getPrestamos } from "../../api/auth";
 import SideBar from "../menu/SideBar";
 import Cuentas from "../cliente/Cuentas";
@@ -81,7 +80,7 @@ export class Home extends Component {
         ref={ref => {
           this.drawer = ref;
         }}
-        content={<SideBar navigator={this.navigator} />}
+        content={<SideBar navigator={this.props.navigation} />}
         onClose={() => this.closeDrawer()}
       >
         <Container>

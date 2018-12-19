@@ -1,5 +1,18 @@
 import React, { Component } from "react";
-import { Container, Content, List, ListItem, Text, View } from "native-base";
+import {
+  Container,
+  Content,
+  List,
+  ListItem,
+  Text,
+  View,
+  Left,
+  Body,
+  Right,
+  Button,
+  Icon,
+  Switch
+} from "native-base";
 import { Image, StyleSheet } from "react-native";
 
 class SideBar extends Component {
@@ -15,7 +28,10 @@ class SideBar extends Component {
           </View>
 
           <List>
-            <ListItem>
+            <ListItem
+              button
+              onPress={() => this.props.navigator.navigate("LoginPage")}
+            >
               <Text>Pagos</Text>
             </ListItem>
             <ListItem>
@@ -26,6 +42,19 @@ class SideBar extends Component {
             </ListItem>
             <ListItem>
               <Text>Personal</Text>
+            </ListItem>
+            <ListItem icon>
+              <Left>
+                <Button style={{ backgroundColor: "#FF9501" }}>
+                  <Icon active name="plane" />
+                </Button>
+              </Left>
+              <Body>
+                <Text>Airplane Mode</Text>
+              </Body>
+              <Right>
+                <Switch value={false} />
+              </Right>
             </ListItem>
             <ListItem>
               <Text>Log out</Text>
@@ -48,5 +77,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: "10%"
   },
-  logo: { width: 300, height: 90 }
+  logo: { width: 220, height: 70 }
 });
