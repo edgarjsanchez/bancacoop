@@ -100,7 +100,7 @@ export class Home extends Component {
                 transparent
                 onPress={() => this.props.navigation.replace("LoginPage")}
               >
-                <Icon name="exit" style={{ color: "white" }} />
+                <Icon name="log-out" style={{ color: "white" }} />
               </Button>
             </Right>
           </Header>
